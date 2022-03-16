@@ -22,6 +22,8 @@ from user import User
 
 GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
 GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
+user_agent = os.environ.get('user_agent', None)
+API_KEY = os.environ.get("API_KEY", None)
 GOOGLE_DISCOVERY_URL = ("https://accounts.google.com/.well-known/openid-configuration")
 
 app = Flask(__name__)
@@ -161,8 +163,7 @@ def input_city():
 
 @app.route("/list/<city>")
 def weather_week(city):
-    API_KEY = '096915fbe78dbf4720f0fd009334ec78'
-    geolocator = Nominatim(user_agent="ninaskuratova280103@gmail.com")
+    geolocator = Nominatim(user_agent=user_agent)
     location = geolocator.geocode(city)
     lat = location.latitude
     long = location.longitude
@@ -189,8 +190,7 @@ def input_city_date():
 
 @app.route("/<city>/<date>")
 def weather_date(city, date):
-    API_KEY = '096915fbe78dbf4720f0fd009334ec78'
-    geolocator = Nominatim(user_agent="ninaskuratova280103@gmail.com")
+    geolocator = Nominatim(user_agent=user_agent)
     location = geolocator.geocode(city)
     lat = location.latitude
     long = location.longitude
